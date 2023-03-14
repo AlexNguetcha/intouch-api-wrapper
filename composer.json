@@ -1,0 +1,23 @@
+{
+    "name": "alex-nguetcha/intouch",
+    "description": "The Intouch Payment Library is a PHP library that provides a simple interface for making payments with mobile money service providers that are supported by the Intouch platform. This library handles the complexities of interacting with the Intouch API, allowing you to focus on building your application.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "AlexNguetcha\\Intouch\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "AlexNguetcha",
+            "email": "nguetchaalex@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.2"
+    }
+}
