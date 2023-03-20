@@ -194,10 +194,12 @@ class Intouch
 
     private function checkMiminumRequirements($for)
     {
-        if (!is_numeric($this->amount) && in_array($for, ['merchant', 'cashin', 'cashout', 'balance'])) {
-            throw new Exception('You must provide a valid amount for the transaction.');
-        } else if (intval($this->amount) < 100) {
-            throw new Exception('Transaction amount must be greather than 100 XAF');
+        if (in_array($for, ['merchant', 'cashin', 'cashout'])) {
+            if (!is_numeric($this->amount)) {
+                throw new Exception('You must provide a valid amount for the transaction.');
+            } else if (intval($this->amount) < 100) {
+                throw new Exception('Transaction amount must be greather than 100 XAF');
+            }
         }
 
         if (is_null($this->partnerId) && in_array($for, ['cashin', 'balance'])) {

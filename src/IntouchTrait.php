@@ -121,4 +121,15 @@ trait IntouchTrait
     {
         return $this->partnerId;
     }
+
+    public function getCallBack()
+    {
+        return $this->callbackUrl;
+    }
+
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
 }

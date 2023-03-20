@@ -1,1 +1,1 @@
-{"version":1,"defects":[],"times":{"IntouchTest::testCredentials":0.009}}
+{"version":1,"defects":{"IntouchTest::testCredentials":8,"IntouchTest::testGetBalance":7,"IntouchTest::testOperator":8,"IntouchTest::testMakeMerchantPayment":8},"times":{"IntouchTest::testCredentials":0.006,"IntouchTest::testOperator":0.001,"IntouchTest::testCallback":0,"IntouchTest::testGetBalance":1.002,"IntouchTest::testMakeMerchantPayment":5.375}}
