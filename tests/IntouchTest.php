@@ -14,6 +14,8 @@ class IntouchTest extends TestCase
         // load environnement variables
         $dotenv = Dotenv\Dotenv::createImmutable(__DIR__, '../.env');
         $dotenv->load();
+
+        // initialise intouch credentials
         $this->intouch = Intouch::credentials(
             username: $_ENV['DIGEST_AUTH_USERNAME'],
             password: $_ENV['DIGEST_AUTH_PASSWORD'],
@@ -24,26 +26,11 @@ class IntouchTest extends TestCase
             ->amount(100)
             ->phone(695904403)
             ->operator('ORANGE')
-            ->partnerId($partnerId)
-            ->getBalance(
-                [
-                    "recipientEmail" => "nguetchaalex@gmail.com",
-                    "recipientFirstName" => "Alex",
-                    "recipientLastName" => "Nguetcha",
-                ]
-            );
-
-        if ($intouch->isInitiated()) {
-            // Your transaction has been initiated by intouch API
-            echo ($intouch->getResult()->getBody());
-        } else {
-            // something went wrong
-            // echo $intouch->getError()['request'];
-            // echo $intouch->getError()['response'];
-        }
+            ->partnerId($_ENV['PARTNER_ID']);
     }
 
-    public function testGetBalance()
+    public function testContructor()
     {
+        $this->assertSame($_ENV['DIGEST_AUTH_USERNAME'], $this->intouch->getUserName());
     }
 }

@@ -7,6 +7,7 @@ use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Psr7;
+use IntouchTrait;
 
 /**
  * Class Intouch
@@ -16,6 +17,7 @@ use GuzzleHttp\Psr7;
  */
 class Intouch
 {
+    use IntouchTrait;
     /**
      * Intouch Cameroon Service Code for cash-in transaction
      */
@@ -44,97 +46,11 @@ class Intouch
     private const GUTOUCH_API_GETBALANCE = "https://api.gutouch.com/v1/[INTOUCH_ID]/get_balance";
 
     /**
-     * Username and Password provided by Intouch API
-     *
-     * @var string $username
-     * @var string $password
-     */
-    private $username;
-    private $password;
-
-    /**
-     * Login Agent and Password Agent provided by Intouch API
-     * 
-     * @var string $loginAgent
-     * @var string $passwordAgent
-     */
-    private $loginAgent;
-    private $passwordAgent;
-
-    /**
-     * Partner ID
-     * 
-     * @var string|null $partnerId
-     */
-    private $partnerId = null;
-
-    /**
-     * Intouch ID
-     * 
-     * @var string $intouchId
-     */
-    private $intouchId;
-
-    /**
-     * Callback URL to call when payment is successful
-     * 
-     * @var string $callbackUrl
-     */
-    private $callbackUrl;
-
-    /**
-     * Amount of the payment
-     * 
-     * @var string $amount
-     */
-    private $amount;
-
-    /**
-     * Phone number of the recipient
-     * 
-     * @var string $phone
-     */
-    private $phone;
-
-    /**
-     * API endpoint
-     * 
-     * @var string $endpoint
-     */
-    private $endpoint;
-
-    /**
-     * Intouch's service code for payment
-     * 
-     * @var string $serviceCode
-     */
-    private $serviceCode;
-
-    /**
-     * ISP operator (e.g. ORANGE, MTN)
-     * 
-     * @var string $operator
-     */
-    private $operator;
-
-    /**
-     * ID provided by the client
-     * 
-     * @var string|null $idFromClient
-     */
-    private $idFromClient = null;
-
-    /**
      * Supported ISP operators
      * 
      * @var array $SUPPORTED_OPERATORS
      */
     private const SUPPORTED_OPERATORS = ['ORANGE', 'MTN'];
-
-    private $apiResult = null;
-    private $apiError = null;
-
-    private $initiated = false;
 
     /**
      * @param string $username
