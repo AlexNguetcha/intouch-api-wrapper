@@ -141,7 +141,7 @@ class Intouch
      * @param string $password
      * 
      */
-    public function __construct($username, $password, $loginAgent, $passwordAgent, $intouchId)
+    private function __construct($username, $password, $loginAgent, $passwordAgent, $intouchId)
     {
         $this->username = $username;
         $this->password = $password;
