@@ -1,5 +1,8 @@
 <?php
 
+namespace AlexNguetcha\Intouch;
+
+
 trait IntouchTrait
 {
     /**

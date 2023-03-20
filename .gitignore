@@ -5,3 +5,6 @@
 
 # Environnement
 .env
+
+# PHPUnit result cache
+.phpunit.result.cache
