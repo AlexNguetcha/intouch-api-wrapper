@@ -47,9 +47,7 @@ class IntouchTest extends TestCase
     public function testMakeMerchantPayment(): void
     {
         $amount = random_int(100, 500);
-        if ($amount % 5 != 0) {
-            $amount += $amount % 5;
-        }
+        $amount += $amount % 5;
         $result = $this->intouch->callback('https://app.test/confirm-payment')
             ->amount($amount)
             ->phone($_ENV['PHONE'])
