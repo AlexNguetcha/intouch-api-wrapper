@@ -7,7 +7,7 @@ The Intouch Payment Library is a PHP library that provides a simple interface fo
 To install the Intouch Payment Library, you can use [Composer](https://getcomposer.org/), a package manager for PHP. Run the following command in your project directory:
 
 ```
-composer require alexnguetcha/intouch
+composer require alex-nguetcha/intouch
 ```
 
 ## Complete example
