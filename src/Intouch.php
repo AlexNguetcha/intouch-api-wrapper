@@ -342,7 +342,7 @@ class Intouch
             || array_key_exists('amount', $result));
         if (!$initiated) {
             $this->setError([
-                'request' => array_key_exists('request', $this->getError()) ? $this->getError()['request'] : null,
+                'request' => array_key_exists('request', $this->getError() ?? []) ? $this->getError()['request'] : null,
                 'response' => $result
             ]);
         }
