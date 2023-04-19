@@ -33,7 +33,7 @@ class Intouch
      */
     private const GUTOUCH_API_URL = "https://api.gutouch.com/dist/api/touchpayapi/v1/[INTOUCH_ID]/transaction?
     loginAgent=[LOGIN_AGENT]&passwordAgent=[PASSWORD_AGENT]";
-    
+
     /**
      * URL for cash-in payment endpoint
      */
@@ -145,9 +145,9 @@ class Intouch
 
     private function replaceUrlAgentCredentials(string $url): string
     {
-        $url =  str_replace('[LOGIN_AGENT]', $this->loginAgent, $url);
-        $url =  str_replace('[PASSWORD_AGENT]', $this->passwordAgent, $url);
-        $url =  str_replace('[INTOUCH_ID]', $this->intouchId, $url);
+        $url = str_replace('[LOGIN_AGENT]', $this->loginAgent, $url);
+        $url = str_replace('[PASSWORD_AGENT]', $this->passwordAgent, $url);
+        $url = str_replace('[INTOUCH_ID]', $this->intouchId, $url);
         return $url;
     }
 
