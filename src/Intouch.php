@@ -11,7 +11,6 @@ use GuzzleHttp\Psr7;
 /**
  * Class Intouch
  * A PHP wrapper for Intouch API to perform cash-in, cash-out and balance transactions.
- * 
  * @package AlexNguetcha\Intouch
  */
 class Intouch
@@ -32,8 +31,9 @@ class Intouch
     /**
      * URL for merchant payment endpoint
      */
-    private const GUTOUCH_API_URL = "https://api.gutouch.com/dist/api/touchpayapi/v1/[INTOUCH_ID]/transaction?loginAgent=[LOGIN_AGENT]&passwordAgent=[PASSWORD_AGENT]";
-
+    private const GUTOUCH_API_URL = "https://api.gutouch.com/dist/api/touchpayapi/v1/[INTOUCH_ID]/transaction?
+    loginAgent=[LOGIN_AGENT]&passwordAgent=[PASSWORD_AGENT]";
+    
     /**
      * URL for cash-in payment endpoint
      */
@@ -46,7 +46,6 @@ class Intouch
 
     /**
      * Supported ISP operators
-     * 
      * @var array $SUPPORTED_OPERATORS
      */
     private const SUPPORTED_OPERATORS = ['ORANGE', 'MTN'];
@@ -125,14 +124,22 @@ class Intouch
     {
         $operator = strtoupper($operator ?? '');
         if (!in_array($operator, self::SUPPORTED_OPERATORS)) {
-            throw new Exception("Unsupported operator: $operator, supported operators are " . implode(",", self::SUPPORTED_OPERATORS));
+            throw new Exception(
+                "Unsupported operator: $operator, supported operators are "
+                    . implode(",", self::SUPPORTED_OPERATORS)
+            );
         }
         $this->operator = $operator;
         return $this;
     }
 
-    public static function credentials(string $username, string $password, string $loginAgent, string $passwordAgent, $intouchId): Intouch
-    {
+    public static function credentials(
+        string $username,
+        string $password,
+        string $loginAgent,
+        string $passwordAgent,
+        $intouchId
+    ): Intouch {
         return new Intouch($username, $password, $loginAgent, $passwordAgent, $intouchId);
     }
 
@@ -144,7 +151,7 @@ class Intouch
         return $url;
     }
 
-    private function setTheRighServiceCodeAndEndpoint($for = 'merchant' | 'cashin' | 'cashout' | 'balance')
+    private function setTheRightServiceCodeAndEndpoint($for = 'merchant' | 'cashin' | 'cashout' | 'balance')
     {
         // check the operator
         if ($for !== 'balance' && $this->operator === null) {
@@ -157,7 +164,7 @@ class Intouch
                 if ($this->operator == self::SUPPORTED_OPERATORS[0]) {
                     // ORANGE
                     $this->serviceCode('CM_PAIEMENTMARCHAND_OM_TP');
-                } else if ($this->operator == self::SUPPORTED_OPERATORS[1]) {
+                } elseif ($this->operator == self::SUPPORTED_OPERATORS[1]) {
                     // MTN
                     $this->serviceCode('PAIEMENTMARCHAND_MTN_CM');
                 }
@@ -192,7 +199,7 @@ class Intouch
         return preg_match('/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/', $url) !== false;
     }
 
-    private function checkMiminumRequirements($for)
+    private function checkMinimumRequirements($for)
     {
         if (in_array($for, ['merchant', 'cashin', 'cashout'])) {
             if (!is_numeric($this->amount)) {
@@ -219,11 +226,11 @@ class Intouch
      * Initiate a merchant payment
      * @param array additionnalInfos
      */
-    public function makeMerchantPayment(array $additionnalInfos = []): Intouch
+    public function makeMerchantPayment(array $additionalInfos = []): Intouch
     {
 
-        $this->checkMiminumRequirements('merchant');
-        $this->setTheRighServiceCodeAndEndpoint('merchant');
+        $this->checkMinimumRequirements('merchant');
+        $this->setTheRightServiceCodeAndEndpoint('merchant');
 
         $payload = [
             'idFromClient' => $this->idFromClient ?? time(),
@@ -231,7 +238,7 @@ class Intouch
             'callback' => $this->callbackUrl,
             'recipientNumber' => $this->phone,
             'serviceCode' => $this->serviceCode,
-            'additionnalInfos' => $additionnalInfos
+            'additionalInfos' => $additionalInfos
         ];
 
         $client = new Client([]);
@@ -259,8 +266,8 @@ class Intouch
     public function sendMoney()
     {
 
-        $this->checkMiminumRequirements('cashin');
-        $this->setTheRighServiceCodeAndEndpoint('cashin');
+        $this->checkMinimumRequirements('cashin');
+        $this->setTheRightServiceCodeAndEndpoint('cashin');
 
         $payload = [
             "service_id" => $this->serviceCode,
@@ -298,8 +305,8 @@ class Intouch
 
     public function getBalance()
     {
-        $this->checkMiminumRequirements('balance');
-        $this->setTheRighServiceCodeAndEndpoint('balance');
+        $this->checkMinimumRequirements('balance');
+        $this->setTheRightServiceCodeAndEndpoint('balance');
 
         $payload = [
             "partner_id" => $this->partnerId,
@@ -316,7 +323,6 @@ class Intouch
                 'auth' => [$this->username, $this->password, 'basic'],
                 'verify' => false
             ]);
-            // var_dump($result);
             $this->apiResult($result);
         } catch (ConnectException $e) {
             $this->setError([
@@ -334,7 +340,9 @@ class Intouch
 
     public function isInitiated(): bool
     {
-        if ($this->apiResult === null) return false;
+        if ($this->apiResult === null) {
+            return false;
+        }
 
         $body = (string)($this->apiResult->getBody());
         $result = get_object_vars(json_decode($body));

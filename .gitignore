@@ -9,3 +9,5 @@
 # PHPUnit result cache
 .phpunit.result.cache
 /phpunit.cache
+
+.vscode

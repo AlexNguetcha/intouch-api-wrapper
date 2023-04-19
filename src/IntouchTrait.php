@@ -16,7 +16,6 @@ trait IntouchTrait
 
     /**
      * Login Agent and Password Agent provided by Intouch API
-     * 
      * @var string $loginAgent
      * @var string $passwordAgent
      */
@@ -25,63 +24,54 @@ trait IntouchTrait
 
     /**
      * Partner ID
-     * 
      * @var string|null $partnerId
      */
     private $partnerId = null;
 
     /**
      * Intouch ID
-     * 
      * @var string $intouchId
      */
     private $intouchId;
 
     /**
      * Callback URL to call when payment is successful
-     * 
      * @var string $callbackUrl
      */
     private $callbackUrl;
 
     /**
      * Amount of the payment
-     * 
      * @var string $amount
      */
     private $amount;
 
     /**
      * Phone number of the recipient
-     * 
      * @var string $phone
      */
     private $phone;
 
     /**
      * API endpoint
-     * 
      * @var string $endpoint
      */
     private $endpoint;
 
     /**
      * Intouch's service code for payment
-     * 
      * @var string $serviceCode
      */
     private $serviceCode;
 
     /**
      * ISP operator (e.g. ORANGE, MTN)
-     * 
      * @var string $operator
      */
     private $operator;
 
     /**
      * ID provided by the client
-     * 
      * @var string|null $idFromClient
      */
     private $idFromClient = null;
@@ -131,5 +121,4 @@ trait IntouchTrait
     {
         return $this->phone;
     }
-
 }
